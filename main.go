@@ -62,6 +62,12 @@ func main() {
 		return
 	}
 
+	namespace := os.Getenv("namespace")
+
+	if len(namespace) > 0 {
+		log.Printf("Namespace: %s\n", namespace)
+	}
+
 	config := &types.ControllerConfig{
 		RebuildInterval:          time.Millisecond * 1000,
 		GatewayURL:               gatewayURL,
@@ -69,6 +75,7 @@ func main() {
 		PrintResponseBody:        true,
 		TopicAnnotationDelimiter: ",",
 		AsyncFunctionInvocation:  asyncInvoke,
+		Namespace:                namespace,
 	}
 
 	log.Printf("Topic: %s\tBroker: %s\tAsync: %v\n", *topic, *broker, asyncInvoke)
