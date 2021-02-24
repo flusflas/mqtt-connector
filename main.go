@@ -12,7 +12,7 @@ import (
 	"time"
 
 	MQTT "github.com/eclipse/paho.mqtt.golang"
-	"github.com/openfaas-incubator/connector-sdk/types"
+	"github.com/flusflas/connector-sdk/types"
 	"github.com/openfaas/faas-provider/auth"
 )
 
@@ -62,6 +62,8 @@ func main() {
 		return
 	}
 
+	namespace := os.Getenv("namespace")
+
 	config := &types.ControllerConfig{
 		RebuildInterval:          time.Millisecond * 1000,
 		GatewayURL:               gatewayURL,
@@ -69,9 +71,14 @@ func main() {
 		PrintResponseBody:        true,
 		TopicAnnotationDelimiter: ",",
 		AsyncFunctionInvocation:  asyncInvoke,
+		Namespace:                namespace,
 	}
 
-	log.Printf("Topic: %s\tBroker: %s\tAsync: %v\n", *topic, *broker, asyncInvoke)
+	if len(namespace) == 0 {
+		namespace = "<all>"
+	}
+
+	log.Printf("Namespace: %s\tTopic: %s\tBroker: %s\tAsync: %v\n", namespace, *topic, *broker, asyncInvoke)
 
 	controller := types.NewController(creds, config)
 
