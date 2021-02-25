@@ -2,7 +2,7 @@ FROM teamserverless/license-check:0.3.6 as license-check
 
 FROM golang:1.13 as builder
 ENV CGO_ENABLED=0
-ENV GO111MODULE=off
+ENV GO111MODULE=on
 
 COPY --from=license-check /license-check /usr/bin/
 
@@ -12,9 +12,7 @@ WORKDIR /go/src/github.com/openfaas-incubator/mqtt-connector
 COPY . .
 
 ARG OPTS
-# RUN go mod download
-
-RUN gofmt -l -d $(find . -type f -name '*.go' -not -path "./vendor/*")
+RUN go mod download
 RUN go test -v ./...
 RUN VERSION=$(git describe --all --exact-match `git rev-parse HEAD` | grep tags | sed 's/tags\///') && \
   GIT_COMMIT=$(git rev-list -1 HEAD) && \
