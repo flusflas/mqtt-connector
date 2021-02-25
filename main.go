@@ -18,11 +18,13 @@ import (
 
 func main() {
 	var (
+		err             error
 		gatewayUsername string
 		gatewayPassword string
 		gatewayFlag     string
 		trimChannelKey  bool
 		asyncInvoke     bool
+		rebuildInterval time.Duration
 	)
 
 	flag.StringVar(&gatewayUsername, "gw-username", "", "Username for the gateway")
@@ -38,6 +40,7 @@ func main() {
 	id := flag.String("id", "testgoid", "The ClientID (optional)")
 	cleansess := flag.Bool("clean", false, "Set Clean Session (default false)")
 	qos := flag.Int("qos", 0, "The Quality of Service 0,1,2 (default 0)")
+	rebuildIntervalStr := flag.String("rebuild_interval", "10s", "Interval between rebuilding map of functions vs. topics (default 10s)")
 
 	flag.Parse()
 
@@ -62,10 +65,15 @@ func main() {
 		return
 	}
 
+	if rebuildInterval, err = time.ParseDuration(*rebuildIntervalStr); err != nil {
+		log.Printf("Invalid rebuild interval (%v)", err)
+		rebuildInterval = time.Second * 10
+	}
+
 	namespace := os.Getenv("namespace")
 
 	config := &types.ControllerConfig{
-		RebuildInterval:          time.Millisecond * 1000,
+		RebuildInterval:          rebuildInterval,
 		GatewayURL:               gatewayURL,
 		PrintResponse:            true,
 		PrintResponseBody:        true,
@@ -78,7 +86,7 @@ func main() {
 		namespace = "<all>"
 	}
 
-	log.Printf("Namespace: %s\tTopic: %s\tBroker: %s\tAsync: %v\n", namespace, *topic, *broker, asyncInvoke)
+	log.Printf("Namespace: %s\tTopic: %s\tBroker: %s\tAsync: %v\tRebuild Interval: %v\n", namespace, *topic, *broker, asyncInvoke, rebuildInterval)
 
 	controller := types.NewController(creds, config)
 
