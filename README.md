@@ -1,6 +1,13 @@
 ## mqtt-connector
 
-[![Build Status](https://travis-ci.com/openfaas-incubator/mqtt-connector.svg?branch=master)](https://travis-ci.com/openfaas-incubator/mqtt-connector)
+> ### About this fork
+>
+> This repository is a fork of the  [OpenFaaS MQTT Connector](https://github.com/openfaas/mqtt-connector)
+> with some features and changes:
+> - Support for **namespace filtering** using [flusflas/connector-sdk](https://github.com/flusflas/connector-sdk)
+>   and `namespace` environment variable.
+> - Configurable rebuild interval for functions-topics mapping.
+> - Switch from Go Dep to Go Module.
 
 ## Status
 
