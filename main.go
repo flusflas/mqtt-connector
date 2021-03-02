@@ -18,13 +18,14 @@ import (
 
 func main() {
 	var (
-		err             error
-		gatewayUsername string
-		gatewayPassword string
-		gatewayFlag     string
-		trimChannelKey  bool
-		asyncInvoke     bool
-		rebuildInterval time.Duration
+		err              error
+		gatewayUsername  string
+		gatewayPassword  string
+		gatewayFlag      string
+		trimChannelKey   bool
+		asyncInvoke      bool
+		asyncCallbackURL string
+		rebuildInterval  time.Duration
 	)
 
 	flag.StringVar(&gatewayUsername, "gw-username", "", "Username for the gateway")
@@ -32,6 +33,7 @@ func main() {
 	flag.StringVar(&gatewayFlag, "gateway", "", "gateway")
 	flag.BoolVar(&trimChannelKey, "trim-channel-key", false, "Trim channel key when using emitter.io MQTT broker")
 	flag.BoolVar(&asyncInvoke, "async-invoke", false, "Invoke via queueing using NATS and the function's async endpoint")
+	flag.StringVar(&asyncCallbackURL, "async-callback-url", "", "Callback URL for asynchronous invocations")
 
 	topic := flag.String("topic", "", "The topic name to/from which to publish/subscribe")
 	broker := flag.String("broker", "tcp://iot.eclipse.org:1883", "The broker URI. ex: tcp://10.10.1.1:1883")
@@ -79,6 +81,7 @@ func main() {
 		PrintResponseBody:        true,
 		TopicAnnotationDelimiter: ",",
 		AsyncFunctionInvocation:  asyncInvoke,
+		AsyncFunctionCallbackURL: asyncCallbackURL,
 		Namespace:                namespace,
 	}
 
