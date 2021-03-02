@@ -89,7 +89,14 @@ func main() {
 		namespace = "<all>"
 	}
 
-	log.Printf("Namespace: %s\tTopic: %s\tBroker: %s\tAsync: %v\tRebuild Interval: %v\n", namespace, *topic, *broker, asyncInvoke, rebuildInterval)
+	log.Printf("MQTT Connector:\n"+
+		"\tNamespace: %s\n"+
+		"\tTopic: %s\n"+
+		"\tBroker: %s\n"+
+		"\tAsync: %v\n"+
+		"\tAsync Callback: %v\n"+
+		"\tRebuild Interval: %v\n",
+		namespace, *topic, *broker, asyncInvoke, asyncCallbackURL, rebuildInterval)
 
 	controller := types.NewController(creds, config)
 
