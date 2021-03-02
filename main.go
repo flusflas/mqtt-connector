@@ -115,18 +115,22 @@ func main() {
 	receiveCount := 0
 	choke := make(chan [2]string)
 
-	opts.SetDefaultPublishHandler(func(client MQTT.Client, msg MQTT.Message) {
+	msgHandler := func(client MQTT.Client, msg MQTT.Message) {
 		choke <- [2]string{msg.Topic(), string(msg.Payload())}
-	})
+	}
 
 	client := MQTT.NewClient(opts)
 	if token := client.Connect(); token.Wait() && token.Error() != nil {
 		panic(token.Error())
 	}
 
-	if token := client.Subscribe(*topic, byte(*qos), nil); token.Wait() && token.Error() != nil {
-		fmt.Println(token.Error())
-		os.Exit(1)
+	// Splits the topic list and creates a subscription per topic
+	for _, t := range strings.Split(*topic, ",") {
+		t = strings.TrimSpace(t)
+		if token := client.Subscribe(t, byte(*qos), msgHandler); token.Wait() && token.Error() != nil {
+			fmt.Println(token.Error())
+			os.Exit(1)
+		}
 	}
 
 	for {

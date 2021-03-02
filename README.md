@@ -10,6 +10,11 @@
 > - Switch from Go Dep to Go Module.
 > - Add `async-callback-url` command argument to set an optional callback URL
 >   for asynchronous invocations.
+> - Fix the behavior with topic subscriptions: before, a default message handler
+>   was handling every message on every topic (which was equivalent to a
+>   subscription to `#`). Now, a subscription per topic is created from the
+>   comma-separated list of topics, and a non-default handler is used to only
+>   handle the messages on the subscribed topics.
 
 ## Status
 
