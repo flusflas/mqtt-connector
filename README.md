@@ -8,6 +8,8 @@
 >   and `namespace` environment variable.
 > - Configurable rebuild interval for functions-topics mapping.
 > - Switch from Go Dep to Go Module.
+> - Add `async-callback-url` command argument to set an optional callback URL
+>   for asynchronous invocations.
 
 ## Status
 
