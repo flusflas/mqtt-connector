@@ -1,8 +1,8 @@
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/eclipse/paho.mqtt.golang v1.2.0 h1:1F8mhG9+aO5/xpdtFkW4SxOJB67ukuDC3t2y2qayIX0=
 github.com/eclipse/paho.mqtt.golang v1.2.0/go.mod h1:H9keYFcgq3Qr5OUJm/JZI/i6U7joQ8SYLhZwfeOo6Ts=
-github.com/flusflas/connector-sdk v0.0.0-20210226143628-dd5b3ffd710c h1:mqdp+HvFAgmAl9l6aZWXorV3pB8rX/NdHsxyBs4bMTo=
-github.com/flusflas/connector-sdk v0.0.0-20210226143628-dd5b3ffd710c/go.mod h1:KbIhI4zxFiKX4T4/RrkuRWfPknr2tdE0dnSh1Be0ytY=
+github.com/flusflas/connector-sdk v0.0.0-20210420115230-7e53da1aaeeb h1:VswzqojIhvr9Yp47ZsTvBQVxMyR82WrFNPoCHNJTIQE=
+github.com/flusflas/connector-sdk v0.0.0-20210420115230-7e53da1aaeeb/go.mod h1:KbIhI4zxFiKX4T4/RrkuRWfPknr2tdE0dnSh1Be0ytY=
 github.com/gorilla/mux v1.8.0/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
 github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=

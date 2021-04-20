@@ -9,4 +9,4 @@ require (
 	golang.org/x/net v0.0.0-20191126235420-ef20fe5d7933 // indirect
 )
 
-replace github.com/openfaas-incubator/connector-sdk => github.com/flusflas/connector-sdk v0.0.0-20210226143628-dd5b3ffd710c
+replace github.com/openfaas-incubator/connector-sdk => github.com/flusflas/connector-sdk v0.0.0-20210420115230-7e53da1aaeeb
