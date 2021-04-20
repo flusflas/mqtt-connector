@@ -15,6 +15,7 @@
 >   subscription to `#`). Now, a subscription per topic is created from the
 >   comma-separated list of topics, and a non-default handler is used to only
 >   handle the messages on the subscribed topics.
+> - A custom topic matcher has been added to support MQTT topics with wildcards.
 
 ## Status
 
