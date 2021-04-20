@@ -28,6 +28,8 @@ func main() {
 		rebuildInterval  time.Duration
 	)
 
+	defer writePanicToFile()
+
 	flag.StringVar(&gatewayUsername, "gw-username", "", "Username for the gateway")
 	flag.StringVar(&gatewayPassword, "gw-password", "", "Password for gateway")
 	flag.StringVar(&gatewayFlag, "gateway", "", "gateway")
@@ -167,5 +169,21 @@ func (ResponseReceiver) Response(res types.InvokerResponse) {
 		log.Printf("tester got error: %s", res.Error.Error())
 	} else {
 		log.Printf("tester got result: [%d] %s => %s (%d) bytes", res.Status, res.Topic, res.Function, len(*res.Body))
+	}
+}
+
+// writePanicToFile writes the panic error to the file given by the
+// TERMINATION_MESSAGE_PATH environment variable.
+func writePanicToFile() {
+	terminationFilename := os.Getenv("TERMINATION_MESSAGE_PATH")
+	f, err := os.OpenFile(terminationFilename, os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		return
+	}
+
+	if r := recover(); r != nil {
+		f.Truncate(0)
+		f.WriteString(fmt.Sprintf("%v", r))
+		panic(r)
 	}
 }
