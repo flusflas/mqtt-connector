@@ -6,6 +6,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/flusflas/mqtt-connector/mqtt"
 	"log"
 	"os"
 	"strings"
@@ -83,6 +84,7 @@ func main() {
 		AsyncFunctionInvocation:  asyncInvoke,
 		AsyncFunctionCallbackURL: asyncCallbackURL,
 		Namespace:                namespace,
+		TopicMatcher:             mqtt.MatchMQTTTopics,
 	}
 
 	if len(namespace) == 0 {
