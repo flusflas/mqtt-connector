@@ -15,6 +15,9 @@
 >   subscription to `#`). Now, a subscription per topic is created from the
 >   comma-separated list of topics, and a non-default handler is used to only
 >   handle the messages on the subscribed topics.
+> - If the `TERMINATION_MESSAGE_PATH` environment variable is set and the value
+>   is a valid file path, any panic message will be written to this file. It
+>   can be used to have a termination message from Kubernetes if the pod fails.
 
 ## Status
 
